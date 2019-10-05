@@ -5,7 +5,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Laboratorio EJB | Listado de Usuarios</title>
+        <title>Laboratorio EJB | Crear Usuario</title>
         <h:outputStylesheet library = "css" name = "userlist.css"  /> 
         <h:outputStylesheet library = "bootstrap-4.3.1-dist/css" name = "bootstrap-grid.css"  /> 
         <h:outputStylesheet library = "bootstrap-4.3.1-dist/css" name = "bootstrap-grid.css.map"  /> 
@@ -31,44 +31,36 @@
 
     </h:head>
     <h:body style="color: #666;background: #f5f5f5;font-family: 'Roboto', sans-serif;">
-        <p:outputPanel styleClass="alert alert-success" >
-            Bienvenido! #{usuarioController.actual.correo}
+        <p:outputPanel styleClass="alert alert-primary" >
+            Se está agregando un nuevo usuario!
         </p:outputPanel>
         <h:form>
             <p:outputPanel styleClass="container">
-                <h:outputLabel value="Listado de Usuarios" style="font-size: 32px; text-align: center;"/>
-                <h:commandButton styleClass="btn btn-success" style="float:right;" value="Agregar Usuario" action="#{usuarioController.prepareCreate()}"/>
+                <h:outputLabel value="Editar Usuario" style="font-size: 32px; text-align: center;"/>
                 <p:outputPanel styleClass="table-wrapper">
-                    <h:dataTable styleClass="table table-striped" value="#{usuarioController.listado}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" >
+                    <h:panelGrid styleClass="table table-striped" columns="3">
                         <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Correo"/>
-                            </f:facet>
-                            <h:outputText value="#{item.correo}"/>
+                            Correo<br></br>
+                            <h:inputText id="correo" value="#{usuarioController.actual.correo}" title="Correo" required="true"/>
                         </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Clave"/>
-                            </f:facet>
-                            <h:outputText value="#{item.clave}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Tipo"/>
-                            </f:facet>
-                            <h:outputText value="#{item.tipo}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="&nbsp;"/>
-                            </f:facet>
 
-                            <h:commandButton styleClass="btn btn-primary" action="#{usuarioController.prepareEdit()}" value="Editar"/>
-                            <h:outputText value=" "/>
-                            <h:commandButton styleClass="btn btn-danger" action="#{usuarioController.delete()}" value="Borrar"/>
-                            <h:outputText value=" "/>
+                        <h:column>
+                            Clave<br></br>
+                            <h:inputText id="clave" value="#{usuarioController.actual.clave}" title="Clave" required="true"/>
                         </h:column>
-                    </h:dataTable>
+
+                        <h:column>
+                            Tipo<br></br>
+                            <h:selectOneMenu id="tipo" value = "#{usuarioController.actual.tipo}" required="true"> 
+                                <f:selectItem itemValue = "A" itemLabel = "Administrador" /> 
+                                <f:selectItem itemValue = "C" itemLabel = "Coordinador" />
+                                <f:selectItem itemValue = "P" itemLabel = "Participante" /> 
+                            </h:selectOneMenu> 	
+                        </h:column>
+                    </h:panelGrid>
+                    <h:commandLink styleClass="btn btn-success" action="#{usuarioController.create()}" value="Crear Usuario" />
+                    <br></br>
+                    <h:commandButton styleClass="btn btn-primary" action="#{usuarioController.prepareList()}" value="Volver al listado" immediate="true"/>
                 </p:outputPanel>
             </p:outputPanel>>
         </h:form>
