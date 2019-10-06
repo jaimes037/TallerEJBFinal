@@ -37,6 +37,7 @@
         <h:form>
             <p:outputPanel styleClass="container">
                 <h:outputLabel value="Editar Usuario" style="font-size: 32px; text-align: center;"/>
+                <h:commandButton style="float:right;" styleClass="btn btn-primary" action="#{usuarioController.prepareList()}" value="Volver al listado" immediate="true"/>
                 <p:outputPanel styleClass="table-wrapper">
                     <h:panelGrid styleClass="table table-striped" columns="3">
                         <h:column>
@@ -60,7 +61,6 @@
                     </h:panelGrid>
                     <h:commandLink styleClass="btn btn-success" action="#{usuarioController.create()}" value="Crear Usuario" />
                     <br></br>
-                    <h:commandButton styleClass="btn btn-primary" action="#{usuarioController.prepareList()}" value="Volver al listado" immediate="true"/>
                 </p:outputPanel>
             </p:outputPanel>>
         </h:form>
